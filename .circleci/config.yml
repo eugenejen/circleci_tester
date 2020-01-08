@@ -8,12 +8,18 @@ jobs:
       - run: echo "a first world"
       - run: mkdir -p my_workspace
       - run: echo "workspace mutation" > my_workspace/output
+      - persist_to_workspace:
+          root: my_workspace
+          paths:
+            - output
   two:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
       - run: echo "more hello"
+      - attach_workspace:
+          at: my_workspace
       - run: cat my_workspace/output
 workflows:
   version: 2
