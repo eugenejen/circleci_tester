@@ -19,4 +19,6 @@ workflows:
   one_an_two:
     jobs:
       - one
-      - two
+      - two:
+          requires:
+            - one
