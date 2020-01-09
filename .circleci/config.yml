@@ -9,7 +9,7 @@ jobs:
           cd /tmp
           wget --no-verbose -O phpunit.phar https://phar.phpunit.de/phpunit-5.phar 
           chmod +x phpunit.phar
-          mv phpunit.phar /usr/local/bin/phpunit
+          cp phpunit.phar /usr/local/bin/phpunit
       - persist_to_workspace:
           root: /usr/local/bin
           paths:
