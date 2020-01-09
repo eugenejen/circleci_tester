@@ -2,25 +2,25 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/node:4.8.2
+      - image: circleci/php:5.6.40-jessie
     steps:
       - checkout
-      - run: echo "a first world"
-      - run: mkdir -p my_workspace
-      - run: echo "workspace mutation" > my_workspace/output
+      - run: |
+        cd /tmp
+        wget --no-verbose -O phpunit.phar https://phar.phpunit.de/phpunit-5.phar 
+        chmod +x phpunit.phar
       - persist_to_workspace:
-          root: my_workspace
+          root: /tmp
           paths:
-            - output
+            - phpunit.phar
   two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/php:5.6.40-jessie
     steps:
       - checkout
-      - run: echo "more hello"
       - attach_workspace:
-          at: my_workspace
-      - run: cat my_workspace/output
+          at: /tmp
+      - run:  ls /tmp/phpunit.phar
 workflows:
   version: 2
   one_an_two:
