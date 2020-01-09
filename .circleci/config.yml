@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - run: |
-        cd /tmp
-        wget --no-verbose -O phpunit.phar https://phar.phpunit.de/phpunit-5.phar 
-        chmod +x phpunit.phar
+          cd /tmp
+          wget --no-verbose -O phpunit.phar https://phar.phpunit.de/phpunit-5.phar 
+          chmod +x phpunit.phar
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -20,7 +20,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: /tmp
-      - run:  ls /tmp/phpunit.phar
+      - run: |
+          ls /tmp/phpunit.phar
 workflows:
   version: 2
   one_an_two:
